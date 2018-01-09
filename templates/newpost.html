@@ -5,9 +5,11 @@
 <h1>Add a Blog Entry</h1>
 <form action="/newpost" method="post">
     <label for="name">Title for your new blog:</label> <br>
-    <input name="name" type="text"> <br>
+    <input name="name" type="text"> 
+    <span class="error">{{name_error}}</span> <br>
     <label for="entry">Your new blog:</label> <br>
-    <textarea name="entry"></textarea> <br>
+    <textarea name="entry"></textarea> 
+    <span class="error">{{entry_error}}</span> <br>
     <input type="submit" value="Add Entry">
 </form>
 
