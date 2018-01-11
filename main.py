@@ -47,13 +47,25 @@ def require_login():
         return redirect('/login')
 
 
+@app.route('/')
+def index():
+    users = User.query.all()
+
+    return render_template('index.html', users=users)
+
 @app.route('/blog')
 def list_blogs():
     
     id_exists = request.args.get('id')
+    user_exists = request.args.get('user')
+    author = User.query.filter_by(id = user_exists).first
+
     if id_exists:
         single_blog = Blog.query.filter_by(id = id_exists).first()
         return render_template('singlepost.html', blog=single_blog)
+    if user_exists:
+        single_user_posts = Blog.query.filter_by(owner_id = user_exists).all()
+        return render_template('singleuser.html', blogs = single_user_posts)
     else:   
         blogs = Blog.query.all()
         return render_template('blog.html', blogs=blogs)
